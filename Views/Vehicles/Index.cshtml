@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FleetManagement.Models.VehicleViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle_Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle_Plate_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle_Reg_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vehicle_Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vehicle_Plate_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vehicle_Reg_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.V_VehicleDriversVM.Name )
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.VehicleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VehicleId })
+        </td>
+    </tr>
+}
+
+</table>

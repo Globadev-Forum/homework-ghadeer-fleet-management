@@ -1,0 +1,36 @@
+﻿@model FleetManagement.Models.DriverViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Driver's Details</h2>
+<form action="Edit" method="post">
+    <table>
+        <tr>
+            <td class="d-grid">
+                <label class="form-Label">@Html.DisplayNameFor(model => model.Name)</label>
+            </td>
+            <td>
+                <text type="text" class="form-control" readonly>@Html.DisplayFor(model => model.Name)</text>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td class="d-grid">
+                <label class="form-Label">@Html.DisplayNameFor(model => model.Mobile)</label>
+            </td>
+            <td>
+                <text type="text" class="form-control" readonly>@Html.DisplayFor(model => model.Mobile)</text>
+            </td>
+        </tr>
+    </table>
+    <hr />
+    
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.DriverId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</form>

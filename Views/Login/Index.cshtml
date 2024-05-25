@@ -1,0 +1,47 @@
+﻿@model FleetManagement.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+
+<div class="row" style="align-content: center; font-family: Calibri;">
+
+    <div class="col-md-3 col-md-offset-5" style="align-content: center">
+        <IMG alt="" src="../Images/EFG LOGO">
+        <div style="border: 5px black ridge; padding: 10px; width: 500px; ">
+            <IMG alt="" src="../images/EFG LOGO.jpg">
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+            {
+                <table height="100">
+                    <tr>
+                        <th colspan="2" class="text-center" style="font-size:25px; font-family: Calibri; ">Login</th>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.UserName)</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font: Calibiri">@Html.LabelFor(model => model.Password)</td>
+                        <td>
+                            @Html.EditorFor(model => model.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            @ViewBag.ErrorMessage
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Login" name="login" />
+                        </td>
+                    </tr>
+
+                </table>
+            }
+        </div>
+    </div>
+</div>

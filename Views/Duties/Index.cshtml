@@ -1,0 +1,119 @@
+﻿@model IEnumerable<FleetManagement.Models.DutyViewModel>
+
+@{
+    ViewBag.Title = "All Duties";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string successmessage;
+    string errormessage;
+
+    if (TempData["successmessage"] == null)
+    { successmessage = ""; }
+
+    else
+    { successmessage = TempData["successmessage"].ToString(); }
+
+
+    if (TempData["errormessage"] == null)
+    { errormessage = ""; }
+    else
+    { errormessage = TempData["errormessage"].ToString(); }
+
+}
+
+@if (!string.IsNullOrWhiteSpace(successmessage))
+{
+    <div class="alert alert-sucess" style="font-size:15px; color: forestgreen">
+        <strong></strong>@successmessage
+
+    </div>
+
+}
+else if (!string.IsNullOrWhiteSpace(errormessage))
+{
+    <div class="alert alert-danger" style="font-size:15px; color: red">
+        <strong>Error!</strong>@errormessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+<h2>@ViewBag.title</h2>
+<h2></h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form class="d-flex" asp-action="Index" asp-controller="Duties">
+            <label class="control-label col-md-2">Date</label>
+            <input name="searchString" class="form-control datepicker" type="date" placeholder="Search" aria-label="Search" value=ViewData["SearchString"] />
+            <button class="btn bg-transparent" type="submit"><img src="../images/search-button-th.png" /></button>
+            <button class="btn bg-transparent" asp-action="Index"><img src="../images/clear-button-th.png" /></button>
+        </form>
+  </div>
+
+ 
+
+<div class="row">
+    <div class="col-md-12 p-4">
+        <p>
+            @Html.ActionLink("New Duty", "Create")
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.ActionLink(Html.DisplayNameFor(model => model.Date).ToHtmlString(), "Index", new { sortBy = ViewData["DateSortParam"] })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink(Html.DisplayNameFor(model => model.StartTime).ToHtmlString(), "Index", new { sortBy = ViewData["StartTimeSortParam"] })
+
+                   </th>
+                    <th scope="col">
+                        @Html.ActionLink(Html.DisplayNameFor(model => model.EndTime).ToHtmlString(), "Index", new { sortBy = ViewData["EndTimeSortParam"] })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink(Html.DisplayNameFor(model => model.V_DriversVM.Name ).ToHtmlString(), "Index", new { sortBy = ViewData["DriverSortParam"] })
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Desc)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td scope="row">
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td scope="row">
+                                @Html.DisplayFor(modelItem => item.StartTime)
+                            </td>
+                            <td scope="row">
+                                @Html.DisplayFor(modelItem => item.EndTime)
+                            </td>
+                            <td scope="row">
+
+                                @Html.DisplayFor(modelItem => item.V_DriversVM.Name)
+                            </td>
+                            <td scope="row">
+                                @Html.DisplayFor(modelItem => item.Desc)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.DutyId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.DutyId })
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            $('#datePicker').datepicker({
+                format: 'dd/MM/yyyy',
+            }).datepicker("setDate", 'now');
+        </script>

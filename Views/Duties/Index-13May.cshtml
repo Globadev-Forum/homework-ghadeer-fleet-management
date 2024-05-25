@@ -1,0 +1,68 @@
+﻿@model IEnumerable<FleetManagement.Models.DutyViewModel>
+
+@{
+    ViewBag.Title = "All Duties";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.title</h2>
+
+<p>
+    @Html.ActionLink("New Duty", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Drivers.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    <!--@foreach (var driverModel in Model)
+    {
+        <li>@Html.DisplayFor(modelItem => driverModel.DriverId) </li>-->
+    <!-- HERE is I want to put the filtering... foreach duty WHERE DriverId =  Model.DriverId-->
+    <!--@foreach (var item in Model.Where(x => x.DriverId == driverModel.DriverId))
+        }
+    {-->
+
+    @foreach (var item in Model)
+
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drivers.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.DutyId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.DutyId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.DutyId })
+            </td>
+        </tr>
+    }
+
+</table>
